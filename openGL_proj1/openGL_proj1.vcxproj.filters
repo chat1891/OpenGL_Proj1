@@ -24,7 +24,7 @@
     <ClCompile Include="src\3_Shaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ShaderInNewFile.cpp">
+    <ClCompile Include="src\4_ShaderInNewFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

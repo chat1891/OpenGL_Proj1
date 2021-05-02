@@ -155,6 +155,8 @@
   <ItemGroup>
     <ClCompile Include="src\1_DrawTriangle.cpp" />
     <ClCompile Include="src\2_DrawRectangle.cpp" />
+    <ClCompile Include="src\3_Shaders.cpp" />
+    <ClCompile Include="src\ShaderInNewFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />

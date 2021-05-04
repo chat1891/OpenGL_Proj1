@@ -154,6 +154,8 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    glfwSwapInterval(1);
+
     if (glewInit() != GLEW_OK)
         std::cout << "glew init error" << std::endl;
 
@@ -220,7 +222,15 @@ int main(void)
     std::cout << source.FragmentSource << std::endl;
 
     unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
-    glUseProgram(shader);
+    GLCall(glUseProgram(shader));
+
+    //every uniform got assigned to an id. find id using bytes name
+    GLCall(int location = glGetUniformLocation(shader, "u_Color"));
+    ASSERT(location != -1);
+    GLCall(glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f));
+
+    float b = 0.0;
+    float increment = 0.05f;
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -238,8 +248,13 @@ int main(void)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         GLCall(glBindVertexArray(VAO));
+        GLCall(glUniform4f(location, 0.2, 0.3f, b, 1.0f));
         GLCall(glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0));
         GLCall(glBindVertexArray(0));
+
+        if (b > 1.0f) increment = -0.05;
+        else if (b < 0.0f) increment = 0.05;
+        b += increment;
 
         glEnd();
 

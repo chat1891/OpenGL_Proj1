@@ -157,6 +157,7 @@
     <ClCompile Include="src\2_DrawRectangle.cpp" />
     <ClCompile Include="src\3_Shaders.cpp" />
     <ClCompile Include="src\4_ShaderInNewFile.cpp" />
+    <ClCompile Include="src\5_Vertex Arrays.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />

@@ -9,11 +9,11 @@
 #define ASSERT(x) if(!(x)) __debugbreak();
 
 #ifdef DEBUG
-    #define GLCall(x) GLClearError();\
+#define GLCall(x) GLClearError();\
         x;\
         ASSERT(GLLogCall(#x, __FILE__, __LINE__));
 #else
-    #define GLCall(x) x;
+#define GLCall(x) x;
 #endif
 
 
@@ -27,7 +27,7 @@ static bool GLLogCall(const char* function, const char* file, int line)
 {
     while (GLenum error = glGetError())
     {
-        std::cout << "[OpenGL Error] (" << error << "): " << function << " " << file <<": " << line << std::endl;
+        std::cout << "[OpenGL Error] (" << error << "): " << function << " " << file << ": " << line << std::endl;
         return false;
     }
     return true;
@@ -75,7 +75,7 @@ static ShaderProgramSource ParseShader(const std::string& filePath)
         {
             //use type as index of array
             ss[(int)type] << line << '\n';
-        }   
+        }
     }
     return{ ss[0].str(), ss[1].str() };
 }
@@ -135,7 +135,7 @@ static unsigned int CreateShader(const std::string& vertexShader, const std::str
     return program;
 }
 
-int main(void)
+int ShaderInNewFile_main(void)
 {
     GLFWwindow* window;
 

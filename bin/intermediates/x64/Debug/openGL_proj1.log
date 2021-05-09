@@ -1,5 +1,6 @@
-﻿  4_ShaderInNewFile.cpp
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\4_ShaderInNewFile.cpp(251,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\4_ShaderInNewFile.cpp(255,40): warning C4305: '=': truncation from 'double' to 'float'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\4_ShaderInNewFile.cpp(256,44): warning C4305: '=': truncation from 'double' to 'float'
+﻿  5_Vertex Arrays.cpp
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\5_Vertex Arrays.cpp(257,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\5_Vertex Arrays.cpp(273,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\5_Vertex Arrays.cpp(277,40): warning C4305: '=': truncation from 'double' to 'float'
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\5_Vertex Arrays.cpp(278,44): warning C4305: '=': truncation from 'double' to 'float'
   openGL_proj1.vcxproj -> C:\Dev\CPP_Projects\openGL_proj1\bin\x64\Debug\openGL_proj1.exe

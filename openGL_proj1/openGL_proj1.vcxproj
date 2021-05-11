@@ -158,9 +158,18 @@
     <ClCompile Include="src\3_Shaders.cpp" />
     <ClCompile Include="src\4_ShaderInNewFile.cpp" />
     <ClCompile Include="src\5_Vertex Arrays.cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\IndexBuffer .cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\Renderer.cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\6_abstractingIntoClasses\IndexBuffer.h" />
+    <ClInclude Include="src\6_abstractingIntoClasses\Renderer.h" />
+    <ClInclude Include="src\6_abstractingIntoClasses\VertexBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

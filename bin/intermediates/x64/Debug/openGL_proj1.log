@@ -1,13 +1,9 @@
 ﻿  6_AbstractingIntoClasses.cpp
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(221,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(233,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(237,40): warning C4305: '=': truncation from 'double' to 'float'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(238,44): warning C4305: '=': truncation from 'double' to 'float'
-  IndexBuffer .cpp
-  Renderer.cpp
-  VertexBuffer.cpp
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(229,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(242,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(246,40): warning C4305: '=': truncation from 'double' to 'float'
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(247,44): warning C4305: '=': truncation from 'double' to 'float'
+  VertexArray.cpp
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\VertexArray.cpp(24,3): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
   Generating Code...
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Dev\CPP_Projects\openGL_proj1\bin\x64\Debug\vc120.pdb'; linking object as if no debug info
   openGL_proj1.vcxproj -> C:\Dev\CPP_Projects\openGL_proj1\bin\x64\Debug\openGL_proj1.exe

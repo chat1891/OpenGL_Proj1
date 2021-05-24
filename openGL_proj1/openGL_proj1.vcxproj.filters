@@ -42,6 +42,12 @@
     <ClCompile Include="src\6_abstractingIntoClasses\IndexBuffer .cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\6_abstractingIntoClasses\VertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\6_abstractingIntoClasses\VertexBufferLayoutcpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\6_abstractingIntoClasses\IndexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\6_abstractingIntoClasses\VertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\6_abstractingIntoClasses\VertexBufferLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

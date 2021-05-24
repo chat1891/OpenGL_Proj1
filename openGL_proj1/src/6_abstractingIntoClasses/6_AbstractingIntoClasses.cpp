@@ -11,6 +11,8 @@
 #include"VertexBuffer.h"
 #include"IndexBuffer.h"
 
+#include"VertexArray.h"
+
 /// <summary>
 /// return multiple variables, can also use tuple
 /// </summary>
@@ -180,6 +182,13 @@ int main(void)
     GLCall(glGenVertexArrays(1, &VAO));
     GLCall(glBindVertexArray(VAO));
 
+    VertexArray VA;
+    VertexBuffer VB(positions, sizeof(positions));
+
+    VertexBufferLayout layout;
+    layout.Push<float>(3);
+    VA.AddBuffer(VB, layout);
+
 
     // 2. copy our vertices array in a vertex buffer for OpenGL to use
     VertexBuffer vb(positions, sizeof(positions));
@@ -188,8 +197,7 @@ int main(void)
     IndexBuffer ib(indices, 12);
 
     // 4. then set the vertex attributes pointers
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+
 
     ShaderProgramSource source = ParseShader("res/shaders/Basic.Shader");
 
@@ -220,7 +228,8 @@ int main(void)
         GLCall(glUseProgram(shader));
         GLCall(glUniform4f(location, 0.2, 0.3f, b, 1.0f));
 
-        GLCall(glBindVertexArray(VAO));
+        //GLCall(glBindVertexArray(VAO));
+        VA.Bind();
         ib.Bind();
 
         //press 1 to draw line, press 2 to draw filled
@@ -229,10 +238,10 @@ int main(void)
         if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-        GLCall(glBindVertexArray(VAO));
+        //GLCall(glBindVertexArray(VAO));
         GLCall(glUniform4f(location, 0.2, 0.3f, b, 1.0f));
         GLCall(glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0));
-        GLCall(glBindVertexArray(0));
+        //GLCall(glBindVertexArray(0));
 
         if (b > 1.0f) increment = -0.05;
         else if (b < 0.0f) increment = 0.05;

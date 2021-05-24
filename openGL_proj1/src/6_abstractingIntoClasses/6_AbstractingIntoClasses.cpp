@@ -178,26 +178,19 @@ int main(void)
     };
 
     // 1. bind vertex array object
-    unsigned int VAO;
-    GLCall(glGenVertexArrays(1, &VAO));
-    GLCall(glBindVertexArray(VAO));
-
     VertexArray VA;
+    VA.Bind();
+    
+    // 2. copy our vertices array in a vertex buffer for OpenGL to use
     VertexBuffer VB(positions, sizeof(positions));
 
+    //3. copy our index array in a element buffer for OpenGL to use
+    IndexBuffer IB(indices, 12);
+
+    // 4. then set the vertex attributes pointers
     VertexBufferLayout layout;
     layout.Push<float>(3);
     VA.AddBuffer(VB, layout);
-
-
-    // 2. copy our vertices array in a vertex buffer for OpenGL to use
-    VertexBuffer vb(positions, sizeof(positions));
-
-    //3. copy our index array in a element buffer for OpenGL to use
-    IndexBuffer ib(indices, 12);
-
-    // 4. then set the vertex attributes pointers
-
 
     ShaderProgramSource source = ParseShader("res/shaders/Basic.Shader");
 
@@ -228,9 +221,8 @@ int main(void)
         GLCall(glUseProgram(shader));
         GLCall(glUniform4f(location, 0.2, 0.3f, b, 1.0f));
 
-        //GLCall(glBindVertexArray(VAO));
         VA.Bind();
-        ib.Bind();
+        IB.Bind();
 
         //press 1 to draw line, press 2 to draw filled
         if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
@@ -238,8 +230,8 @@ int main(void)
         if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-        //GLCall(glBindVertexArray(VAO));
-        GLCall(glUniform4f(location, 0.2, 0.3f, b, 1.0f));
+
+        //GLCall(glUniform4f(location, 0.2, 0.3f, b, 1.0f));
         GLCall(glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0));
         //GLCall(glBindVertexArray(0));
 

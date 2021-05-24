@@ -1,9 +1,5 @@
 ﻿  6_AbstractingIntoClasses.cpp
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(229,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(242,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(246,40): warning C4305: '=': truncation from 'double' to 'float'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(247,44): warning C4305: '=': truncation from 'double' to 'float'
-  VertexArray.cpp
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\VertexArray.cpp(24,3): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
-  Generating Code...
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(222,9): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(238,40): warning C4305: '=': truncation from 'double' to 'float'
+C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(239,44): warning C4305: '=': truncation from 'double' to 'float'
   openGL_proj1.vcxproj -> C:\Dev\CPP_Projects\openGL_proj1\bin\x64\Debug\openGL_proj1.exe

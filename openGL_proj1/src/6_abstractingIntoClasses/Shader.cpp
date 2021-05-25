@@ -128,11 +128,20 @@ void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2,
 
 unsigned int Shader::GetUniformLoaction(const std::string& name)
 {
+    //it is not fast to retrieve this location again, again, again.
+    //can cache it to only retrieve it first time then done
+    if (m_Uniform_LocationCache.find(name) != m_Uniform_LocationCache.end())
+    {
+        return m_Uniform_LocationCache[name];
+    }
+
     GLCall(unsigned int location = glGetUniformLocation(m_RendererID, name.c_str()));
     if (location == -1)
     {
         std::cout << "Warning: uniform '" << name << "' doesn't exist!";
     }
+    
+    m_Uniform_LocationCache[name] = location;
     return location;
 }
 

@@ -164,7 +164,6 @@
     <ClCompile Include="src\6_abstractingIntoClasses\Shader.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\VertexArray.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\VertexBuffer.cpp" />
-    <ClCompile Include="src\6_abstractingIntoClasses\VertexBufferLayoutcpp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />

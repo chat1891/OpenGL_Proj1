@@ -14,6 +14,8 @@
 #include"VertexArray.h"
 #include "Shader.h"
 
+#include "VertexBufferLayout.h"
+
 int main(void)
 {
     GLFWwindow* window;
@@ -108,29 +110,24 @@ int main(void)
     float b = 0.0;
     float increment = 0.05f;
 
+    Renderer renderer;
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+        renderer.Clear();
 
         //----bind buffer for every frame
-        shader.Bind();
         shader.SetUniform4f("u_Color", 0.2, 0.3f, b, 1.0f);
 
-        VA.Bind();
-        IB.Bind();
+        renderer.Draw(VA, IB, shader);
 
         //press 1 to draw line, press 2 to draw filled
         if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
-        //GLCall(glUniform4f(location, 0.2, 0.3f, b, 1.0f));
-        GLCall(glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0));
-        //GLCall(glBindVertexArray(0));
 
         if (b > 1.0f) increment = -0.05;
         else if (b < 0.0f) increment = 0.05;

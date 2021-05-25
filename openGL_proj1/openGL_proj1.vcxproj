@@ -161,6 +161,7 @@
     <ClCompile Include="src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\IndexBuffer .cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\Renderer.cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\Shader.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\VertexArray.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\VertexBuffer.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\VertexBufferLayoutcpp.cpp" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="src\6_abstractingIntoClasses\IndexBuffer.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\Renderer.h" />
+    <ClInclude Include="src\6_abstractingIntoClasses\Shader.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\VertexArray.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\VertexBuffer.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\VertexBufferLayout.h" />

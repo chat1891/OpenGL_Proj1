@@ -49,11 +49,17 @@ int main(void)
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     float positions[] = {
-    -0.5f, -0.5f, 0.0f, 0.0f, // bottom left
-     0.5f, -0.5f, 1.0f, 0.0f,  // bottom right
-     0.5f,  0.5f, 1.0f, 1.0f,  // top right
-    -0.5f,  0.5f, 0.0f, 1.0f,   // top left 
+    -0.5f, -0.5f,       0.0f, 0.0f,         1.f, 0.f, 0.f,1.f,// bottom left
+     0.5f, -0.5f,       1.0f, 0.0f,         0.f, 1.f, 0.f,1.f,// bottom right
+     0.5f,  0.5f,       1.0f, 1.0f,         0.f, 0.f, 1.f,1.f,// top right
+    -0.5f,  0.5f,       0.0f, 1.0f,         1.f, 1.f, 0.f,1.f,// top left 
     };
+//    float positions[] = {
+//-0.5f, -0.5f,       0.0f, 0.0f, // bottom left
+// 0.5f, -0.5f,       1.0f, 0.0f, // bottom right
+// 0.5f,  0.5f,       1.0f, 1.0f, // top right
+//-0.5f,  0.5f,       0.0f, 1.0f, // top left 
+//    };
 
     unsigned int indices[] = {  // note that we start from 0!
         0, 1, 2,  // second triangle
@@ -65,7 +71,7 @@ int main(void)
     VA.Bind();
     
     // 2. copy our vertices array in a vertex buffer for OpenGL to use
-    VertexBuffer VB(positions, 4*4*sizeof(float));
+    VertexBuffer VB(positions, sizeof(positions));
 
     //3. copy our index array in a element buffer for OpenGL to use
     IndexBuffer IB(indices, 12);
@@ -74,6 +80,7 @@ int main(void)
     VertexBufferLayout layout;
     layout.Push<float>(2); //one for position
     layout.Push<float>(2); // one for texture
+    layout.Push<float>(4); // one for color
     VA.AddBuffer(VB, layout);
 
 

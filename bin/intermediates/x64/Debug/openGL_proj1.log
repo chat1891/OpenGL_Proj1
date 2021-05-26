@@ -1,12 +1,2 @@
-﻿  6_AbstractingIntoClasses.cpp
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(122,58): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(132,40): warning C4305: '=': truncation from 'double' to 'float'
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp(133,44): warning C4305: '=': truncation from 'double' to 'float'
-  IndexBuffer .cpp
-  Renderer.cpp
-  Shader.cpp
-  VertexArray.cpp
-C:\Dev\CPP_Projects\openGL_proj1\openGL_proj1\src\6_abstractingIntoClasses\VertexArray.cpp(27,3): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
-  VertexBuffer.cpp
-  Generating Code...
+﻿  Texture.cpp
   openGL_proj1.vcxproj -> C:\Dev\CPP_Projects\openGL_proj1\bin\x64\Debug\openGL_proj1.exe

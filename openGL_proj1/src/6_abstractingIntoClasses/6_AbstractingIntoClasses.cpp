@@ -16,6 +16,8 @@
 
 #include "VertexBufferLayout.h"
 
+#include "Texture.h"
+
 int main(void)
 {
     GLFWwindow* window;
@@ -47,35 +49,15 @@ int main(void)
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     float positions[] = {
-    -0.7f,  0.5f, 0.0f,  // top right
-    -0.6f, 0.5f, 0.0f,  // bottom right
-    -0.7f, -0.5f, 0.0f,  // bottom left
-    -0.6f, -0.5f, 0.0f,   // top left 
-    -0.6f, -0.4f, 0.0f,  // bottom right
-    -0.3f, -0.4f, 0.0f,  // bottom left
-    -0.3f, -0.5f, 0.0f   // top left 
+    -0.5f, -0.5f, 0.0f, 0.0f, // bottom left
+     0.5f, -0.5f, 1.0f, 0.0f,  // bottom right
+     0.5f,  0.5f, 1.0f, 1.0f,  // top right
+    -0.5f,  0.5f, 0.0f, 1.0f,   // top left 
     };
 
     unsigned int indices[] = {  // note that we start from 0!
         0, 1, 2,  // second triangle
-        1, 2, 3,
-        3, 4, 6,
-        4, 5, 6
-    };
-
-    float colors[] = {
-     1.0f, 0.0f, 0.0f, // red
-     0.0f, 0.0f, 1.0f,
-     0.0f, 1.0f, 0.0f,
-     1.0f, 0.0f, 0.0f,
-     0.0f, 0.0f, 1.0f,
-     0.0f, 1.0f, 0.0f,
-     1.0f, 0.0f, 0.0f, // red
-     0.0f, 0.0f, 1.0f,
-     0.0f, 1.0f, 0.0f,
-     1.0f, 0.0f, 0.0f,
-     0.0f, 0.0f, 1.0f,
-     0.0f, 1.0f, 0.0f
+        2, 3, 0,
     };
 
     // 1. bind vertex array object
@@ -83,14 +65,15 @@ int main(void)
     VA.Bind();
     
     // 2. copy our vertices array in a vertex buffer for OpenGL to use
-    VertexBuffer VB(positions, sizeof(positions));
+    VertexBuffer VB(positions, 4*4*sizeof(float));
 
     //3. copy our index array in a element buffer for OpenGL to use
     IndexBuffer IB(indices, 12);
 
     // 4. then set the vertex attributes pointers
     VertexBufferLayout layout;
-    layout.Push<float>(3);
+    layout.Push<float>(2); //one for position
+    layout.Push<float>(2); // one for texture
     VA.AddBuffer(VB, layout);
 
 
@@ -100,6 +83,12 @@ int main(void)
 
     //every uniform got assigned to an id. find id using bytes name
     shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
+
+    //6. texture
+    Texture texture("res/textures/dog3.png");
+    texture.Bind();
+    shader.SetUniform1i("u_Texture", 0);
+
 
     //---------unbind all the buffer
     VA.Unbind();

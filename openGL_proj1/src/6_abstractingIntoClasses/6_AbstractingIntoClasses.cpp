@@ -54,17 +54,20 @@ int main(void)
      0.5f,  0.5f,       1.0f, 1.0f,         0.f, 0.f, 1.f,1.f,// top right
     -0.5f,  0.5f,       0.0f, 1.0f,         1.f, 1.f, 0.f,1.f,// top left 
     };
-//    float positions[] = {
-//-0.5f, -0.5f,       0.0f, 0.0f, // bottom left
-// 0.5f, -0.5f,       1.0f, 0.0f, // bottom right
-// 0.5f,  0.5f,       1.0f, 1.0f, // top right
-//-0.5f,  0.5f,       0.0f, 1.0f, // top left 
-//    };
 
     unsigned int indices[] = {  // note that we start from 0!
         0, 1, 2,  // second triangle
         2, 3, 0,
     };
+
+    //blending
+    GLCall(glEnable(GL_BLEND));
+    //glBlendFunc(source, destination)
+    //source = how the source RGBA factor is computer (default is GL_ONE)
+    //destination = how the destination RGBA factor is computer (default is GL_ZERO)
+    //everything with source multiply by 1, which doesn't change
+    //everything with destination multiply by 0, which is 0
+    GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
     // 1. bind vertex array object
     VertexArray VA;
@@ -92,7 +95,7 @@ int main(void)
     shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
 
     //6. texture
-    Texture texture("res/textures/dog3.png");
+    Texture texture("res/textures/pusheen.png");
     texture.Bind();
     shader.SetUniform1i("u_Texture", 0);
 
@@ -115,7 +118,8 @@ int main(void)
         renderer.Clear();
 
         //----bind buffer for every frame
-        shader.SetUniform4f("u_Color", 0.2, 0.3f, b, 1.0f);
+        //shader.SetUniform4f("u_Color", 0.2, 0.3f, b, 1.0f);
+        shader.SetUniform4f("u_Color", 0.4, 0.541, 0.659, 1.0);
 
         renderer.Draw(VA, IB, shader);
 

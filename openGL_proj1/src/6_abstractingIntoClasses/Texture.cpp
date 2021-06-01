@@ -15,10 +15,14 @@ Texture::Texture(const std::string& path)
 	GLCall(glGenTextures(1, &m_RendererID));
 	GLCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 
+	//linear: linear filtering
+	//determine what happens when a u,v coord doesn't precise to a center of pixel. to a individual color value in the texture.
+	//with linear filter, in that case, not just get color of that pixel but avg of that pixel and its immediate neighbors
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	//Render texture on area that is larger in pixels in actual texture size, so need to scale it up
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	//Clamp: not extend the area
+	//S, T: U,V direction
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 

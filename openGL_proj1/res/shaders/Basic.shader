@@ -8,9 +8,11 @@ layout(location =2) in vec4 vertexColor;
 out vec2 v_TexCoord;
 out vec4 v_Color;
 
+uniform mat4 u_ModelViewProjectionMatrix;
+
 void main()
 {
-   gl_Position = position;
+   gl_Position = position * u_ModelViewProjectionMatrix;
    v_TexCoord = texCoord;
    v_Color = vertexColor;
 };

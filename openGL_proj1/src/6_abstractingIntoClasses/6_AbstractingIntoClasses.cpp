@@ -18,6 +18,9 @@
 
 #include "Texture.h"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 int main(void)
 {
     GLFWwindow* window;
@@ -86,6 +89,12 @@ int main(void)
     layout.Push<float>(4); // one for color
     VA.AddBuffer(VB, layout);
 
+	//resize transform
+    //multiply by 2 get 4 by 3
+    //                       leftEdge  right  bottom top
+	glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+	//ortho graphic matrix: map all the coordinates on 2d plane where objects further away do not actually get smaller
+
 
     //5. Shader:
     Shader shader("res/shaders/Basic.Shader");
@@ -98,6 +107,8 @@ int main(void)
     Texture texture("res/textures/pusheen.png");
     texture.Bind();
     shader.SetUniform1i("u_Texture", 0);
+
+    shader.SetUniformMat4f("u_ModelViewProjectionMatrix", proj);
 
 
     //---------unbind all the buffer

@@ -21,6 +21,10 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+#include "imgui/imgui.h"
+
 int main(void)
 {
     GLFWwindow* window;
@@ -57,13 +61,6 @@ int main(void)
     200.0f, 200.0f,       1.0f, 1.0f,         0.f, 0.f, 1.f,1.f,// top right
     100.0f, 200.0f,       0.0f, 1.0f,         1.f, 1.f, 0.f,1.f,// top left 
     };
-
-//    float positions[] = {
-//-10.5f, -10.5f,       0.0f, 0.0f,         1.f, 0.f, 0.f,1.f,// bottom left
-// 10.5f, -10.5f,       1.0f, 0.0f,         0.f, 1.f, 0.f,1.f,// bottom right
-// 10.5f,  10.5f,       1.0f, 1.0f,         0.f, 0.f, 1.f,1.f,// top right
-//-10.5f,  10.5f,       0.0f, 1.0f,         1.f, 1.f, 0.f,1.f,// top left 
-//    };
 
     unsigned int indices[] = {  // note that we start from 0!
         0, 1, 2,  // second triangle
@@ -112,9 +109,6 @@ int main(void)
     // view matrix
     //move camera to the right means move object to the left
     glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
-    glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
-    glm::mat4 mvp = proj * view * model;
-
 
     //5. Shader:
     Shader shader("res/shaders/Basic.Shader");
@@ -128,7 +122,7 @@ int main(void)
     texture.Bind();
     shader.SetUniform1i("u_Texture", 0);
 
-    shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
+
 
 
     //---------unbind all the buffer
@@ -137,20 +131,36 @@ int main(void)
     IB.Unbind();
     shader.Unbind();
 
-    float b = 0.0;
-    float increment = 0.05f;
-
     Renderer renderer;
 
+    //imgui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui::StyleColorsDark();
+    ImGui_ImplOpenGL3_Init((char*)glGetString(330));
+
+    glm::vec3 translation(200, 200, 0);
+
+    float b = 0.0;
+    float increment = 0.05f;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         renderer.Clear();
 
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        glm::mat4 model = glm::translate(glm::mat4(1.0f), translation);
+        glm::mat4 mvp = proj * view * model;
+
         //----bind buffer for every frame
         //shader.SetUniform4f("u_Color", 0.2, 0.3f, b, 1.0f);
-        shader.SetUniform4f("u_Color", 0.4, 0.541, 0.659, 1.0);
+        shader.SetUniform4f("u_Color", 0.4f, 0.541f, 0.659f, 1.0f);
+        shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
 
         renderer.Draw(VA, IB, shader);
 
@@ -160,9 +170,20 @@ int main(void)
         if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-        if (b > 1.0f) increment = -0.05;
-        else if (b < 0.0f) increment = 0.05;
+        if (b > 1.0f) increment = -0.05f;
+        else if (b < 0.0f) increment = 0.05f;
         b += increment;
+
+        //show simple window of imgui
+        {
+            //pass in first memory address of translation. y and z will follow
+            ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 960.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+        }
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glEnd();
 
@@ -177,6 +198,10 @@ int main(void)
     // 
     // --------no need to delete it, because by end of scope, it will deleted by destructor
     //glDeleteProgram(shader);
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
     glfwTerminate();
     return 0;

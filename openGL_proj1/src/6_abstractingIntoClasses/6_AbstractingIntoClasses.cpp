@@ -34,7 +34,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(960, 540, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -52,11 +52,18 @@ int main(void)
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     float positions[] = {
-    -0.5f, -0.5f,       0.0f, 0.0f,         1.f, 0.f, 0.f,1.f,// bottom left
-     0.5f, -0.5f,       1.0f, 0.0f,         0.f, 1.f, 0.f,1.f,// bottom right
-     0.5f,  0.5f,       1.0f, 1.0f,         0.f, 0.f, 1.f,1.f,// top right
-    -0.5f,  0.5f,       0.0f, 1.0f,         1.f, 1.f, 0.f,1.f,// top left 
+    100.0f, 100.0f,       0.0f, 0.0f,         1.f, 0.f, 0.f,1.f,// bottom left
+    200.0f, 100.0f,       1.0f, 0.0f,         0.f, 1.f, 0.f,1.f,// bottom right
+    200.0f, 200.0f,       1.0f, 1.0f,         0.f, 0.f, 1.f,1.f,// top right
+    100.0f, 200.0f,       0.0f, 1.0f,         1.f, 1.f, 0.f,1.f,// top left 
     };
+
+//    float positions[] = {
+//-10.5f, -10.5f,       0.0f, 0.0f,         1.f, 0.f, 0.f,1.f,// bottom left
+// 10.5f, -10.5f,       1.0f, 0.0f,         0.f, 1.f, 0.f,1.f,// bottom right
+// 10.5f,  10.5f,       1.0f, 1.0f,         0.f, 0.f, 1.f,1.f,// top right
+//-10.5f,  10.5f,       0.0f, 1.0f,         1.f, 1.f, 0.f,1.f,// top left 
+//    };
 
     unsigned int indices[] = {  // note that we start from 0!
         0, 1, 2,  // second triangle
@@ -89,11 +96,24 @@ int main(void)
     layout.Push<float>(4); // one for color
     VA.AddBuffer(VB, layout);
 
-	//resize transform
+	//projection matrix
     //multiply by 2 get 4 by 3
     //                       leftEdge  right  bottom top
-	glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+	//glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+	glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
 	//ortho graphic matrix: map all the coordinates on 2d plane where objects further away do not actually get smaller
+
+    //this orhographic projection will convert position coord to be between -1 and 1 space. 
+    // center is 0 for -2.0f, 2.0f
+    //position -0.5 is 1/4 of 0 to -2.0.
+    //so in -1 to 1 space, -0.5 position will be 1/4 of 1, which is -0.25 on our actual screen
+
+
+    // view matrix
+    //move camera to the right means move object to the left
+    glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
+    glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
+    glm::mat4 mvp = proj * view * model;
 
 
     //5. Shader:
@@ -104,11 +124,11 @@ int main(void)
     shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
 
     //6. texture
-    Texture texture("res/textures/pusheen.png");
+    Texture texture("res/textures/dog3.png");
     texture.Bind();
     shader.SetUniform1i("u_Texture", 0);
 
-    shader.SetUniformMat4f("u_ModelViewProjectionMatrix", proj);
+    shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
 
 
     //---------unbind all the buffer

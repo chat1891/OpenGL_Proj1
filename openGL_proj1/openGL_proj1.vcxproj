@@ -124,7 +124,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src\6_abstractingIntoClasses\Vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\6_abstractingIntoClasses;src\6_abstractingIntoClasses\Vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src\6_abstractingIntoClasses\Vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\6_abstractingIntoClasses;src\6_abstractingIntoClasses\Vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,6 +162,7 @@
     <ClCompile Include="src\6_abstractingIntoClasses\IndexBuffer .cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\Renderer.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\Shader.cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\tests\TestClearColor.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\Texture.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\Vendor\imgui\imgui.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\Vendor\imgui\imgui_demo.cpp" />
@@ -182,6 +183,8 @@
     <ClInclude Include="src\6_abstractingIntoClasses\IndexBuffer.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\Renderer.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\Shader.h" />
+    <ClInclude Include="src\6_abstractingIntoClasses\tests\Test.h" />
+    <ClInclude Include="src\6_abstractingIntoClasses\tests\TestClearColor.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\Texture.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\Vendor\imgui\imconfig.h" />
     <ClInclude Include="src\6_abstractingIntoClasses\Vendor\imgui\imgui.h" />

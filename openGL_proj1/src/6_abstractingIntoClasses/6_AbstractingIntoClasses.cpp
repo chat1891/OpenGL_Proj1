@@ -25,6 +25,8 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui.h"
 
+#include "tests/TestClearColor.h"
+
 int main(void)
 {
     GLFWwindow* window;
@@ -140,6 +142,8 @@ int main(void)
     glm::vec3 translationA(200, 200, 0);
     glm::vec3 translationB(400, 200, 0);
 
+    test::TestClearColor testClearColor;
+
     float b = 0.0;
     float increment = 0.05f;
     /* Loop until the user closes the window */
@@ -148,15 +152,23 @@ int main(void)
         /* Render here */
         renderer.Clear();
 
+        testClearColor.OnUpdate(0.0f);
+        testClearColor.OnRender();
+        
+
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+        testClearColor.OnImGuiRender();
+        testClearColor.ImGuiTimesColor();
 
         {
             glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
             glm::mat4 mvp = proj * view * model;
             //----bind buffer for every frame
             //shader.SetUniform4f("u_Color", 0.2, 0.3f, 0.0f, 1.0f);
+            shader.SetUniform4f("u_Color", testClearColor.m_TimesColor[0], testClearColor.m_TimesColor[1], testClearColor.m_TimesColor[2], testClearColor.m_TimesColor[3]);
             shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
             renderer.Draw(VA, IB, shader);
         }

@@ -20,6 +20,7 @@
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include <glm/gtc/type_ptr.hpp>
 
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
@@ -107,10 +108,31 @@ int main(void)
     //position -0.5 is 1/4 of 0 to -2.0.
     //so in -1 to 1 space, -0.5 position will be 1/4 of 1, which is -0.25 on our actual screen
 
-
     // view matrix
     //move camera to the right means move object to the left
     glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+    //glm::mat4(1.0f) is identity matrix
+
+    glm::mat4 trans = glm::mat4(1.0f);
+    trans = glm::rotate(trans, glm::radians(5.0f), glm::vec3(0.0f, 0.0f, 1.0f)); //rotate around z axis
+    trans = glm::scale(trans, glm::vec3(2, 2, 2)); // scale to 0.5 on each axis
+
+    glm::mat4 trans2 = glm::mat4(1.0f);
+    trans2 = glm::rotate(trans2, glm::radians(5.0f), glm::vec3(0.0f, 0.0f, 1.0f)); //rotate around z axis
+    //trans = glm::scale(trans, glm::vec3(2, 2, 2)); // scale to 0.5 on each axis
+
+
+    //read what's in glm::mat4 matrix
+    //it is column[0]->column[3]
+    glm::mat4 test = glm::translate(glm::mat4(9.0f), glm::vec3(2, 3, 4));
+    double dArray2[16] = { 0.0 };
+    const float* pSource2 = (const float*)glm::value_ptr(test);
+    for (int i = 0; i < 16; ++i)
+    {
+        dArray2[i] = pSource2[i];
+    }
+
+
 
     //5. Shader:
     Shader shader("res/shaders/Basic.Shader");
@@ -120,7 +142,7 @@ int main(void)
     shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
 
     //6. texture
-    Texture texture("res/textures/dog3.png");
+    Texture texture("res/textures/seal.png");
     texture.Bind();
     shader.SetUniform1i("u_Texture", 0);
 
@@ -146,6 +168,7 @@ int main(void)
 
     float b = 0.0;
     float increment = 0.05f;
+    float rotationDegree = 0.1;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -162,10 +185,13 @@ int main(void)
 
         testClearColor.OnImGuiRender();
         testClearColor.ImGuiTimesColor();
+        
+        //trans = glm::scale(trans, glm::vec3(2, 2, 2)); // scale to 0.5 on each axis
 
         {
+            trans = glm::rotate(trans, glm::radians(rotationDegree), glm::vec3(0.0f, 0.0f, 1.0f)); //rotate around z axis
             glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
-            glm::mat4 mvp = proj * view * model;
+            glm::mat4 mvp = proj * view * model * trans;
             //----bind buffer for every frame
             //shader.SetUniform4f("u_Color", 0.2, 0.3f, 0.0f, 1.0f);
             shader.SetUniform4f("u_Color", testClearColor.m_TimesColor[0], testClearColor.m_TimesColor[1], testClearColor.m_TimesColor[2], testClearColor.m_TimesColor[3]);
@@ -174,8 +200,9 @@ int main(void)
         }
 
         {
+            trans2 = glm::rotate(trans2, glm::radians(-rotationDegree), glm::vec3(0.0f, 0.0f, 1.0f)); //rotate around z axis
             glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
-            glm::mat4 mvp = proj * view * model;
+            glm::mat4 mvp = proj * view * model * trans2;
             //----bind buffer for every frame
             //shader.SetUniform4f("u_Color", 0.2, 0.3f, b, 1.0f);
             shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);

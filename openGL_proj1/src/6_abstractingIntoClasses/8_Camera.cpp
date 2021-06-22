@@ -28,7 +28,7 @@
 
 #include "tests/TestClearColor.h"
 
-int main_rotatePic(void)
+int main_camera(void)
 {
     GLFWwindow* window;
 
@@ -58,16 +58,64 @@ int main_rotatePic(void)
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
+
     float positions[] = {
-    -50.0f, -50.0f,       0.0f, 0.0f,         1.f, 0.f, 0.f,1.f,// bottom left
-     50.0f, -50.0f,       1.0f, 0.0f,         0.f, 1.f, 0.f,1.f,// bottom right
-     50.0f,  50.0f,       1.0f, 1.0f,         0.f, 0.f, 1.f,1.f,// top right
-    -50.0f,  50.0f,       0.0f, 1.0f,         1.f, 1.f, 0.f,1.f,// top left 
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
     unsigned int indices[] = {  // note that we start from 0!
-        0, 1, 2,  // second triangle
-        2, 3, 0,
+    0, 1, 2,
+    3, 4, 5,
+    6,7,8,
+    9,10,11,
+    12,13,14,
+    15, 16,17,
+    18,19,20,
+    21,22,23,
+    24,25,26,
+    27,28,29,
+    30,31,32,
+    33,34,35
     };
 
     //blending
@@ -87,52 +135,21 @@ int main_rotatePic(void)
     VertexBuffer VB(positions, sizeof(positions));
 
     //3. copy our index array in a element buffer for OpenGL to use
-    IndexBuffer IB(indices, 12);
+    IndexBuffer IB(indices, 36);
 
     // 4. then set the vertex attributes pointers
     VertexBufferLayout layout;
-    layout.Push<float>(2); //one for position
+    layout.Push<float>(3); //one for position
     layout.Push<float>(2); // one for texture
-    layout.Push<float>(4); // one for color
+    //layout.Push<float>(4); // one for color
     VA.AddBuffer(VB, layout);
 
     //projection matrix
-    //multiply by 2 get 4 by 3
-    //                       leftEdge  right  bottom top
-    //glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
     glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-    //ortho graphic matrix: map all the coordinates on 2d plane where objects further away do not actually get smaller
-
-    //this orhographic projection will convert position coord to be between -1 and 1 space. 
-    // center is 0 for -2.0f, 2.0f
-    //position -0.5 is 1/4 of 0 to -2.0.
-    //so in -1 to 1 space, -0.5 position will be 1/4 of 1, which is -0.25 on our actual screen
 
     // view matrix
     //move camera to the right means move object to the left
     glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-    //glm::mat4(1.0f) is identity matrix
-
-    glm::mat4 trans = glm::mat4(1.0f);
-    trans = glm::rotate(trans, glm::radians(5.0f), glm::vec3(0.0f, 0.0f, 1.0f)); //rotate around z axis
-    trans = glm::scale(trans, glm::vec3(2, 2, 2)); // scale to 0.5 on each axis
-
-    glm::mat4 trans2 = glm::mat4(1.0f);
-    trans2 = glm::rotate(trans2, glm::radians(5.0f), glm::vec3(0.0f, 0.0f, 1.0f)); //rotate around z axis
-    //trans = glm::scale(trans, glm::vec3(2, 2, 2)); // scale to 0.5 on each axis
-
-
-    //read what's in glm::mat4 matrix
-    //it is column[0]->column[3]
-    glm::mat4 test = glm::translate(glm::mat4(9.0f), glm::vec3(2, 3, 4));
-    double dArray2[16] = { 0.0 };
-    const float* pSource2 = (const float*)glm::value_ptr(test);
-    for (int i = 0; i < 16; ++i)
-    {
-        dArray2[i] = pSource2[i];
-    }
-
-
 
     //5. Shader:
     Shader shader("res/shaders/Basic.Shader");
@@ -166,14 +183,88 @@ int main_rotatePic(void)
 
     test::TestClearColor testClearColor;
 
+    // init cube pos
+    glm::mat4 model3 = glm::mat4(1.0);
+    glm::mat4 model = glm::mat4(1.0);
+    glm::mat4 model10[] = {
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+        glm::mat4(1.0),
+    };
+
+    glm::vec3 cubePositions[] = {
+    glm::vec3(0.0f,  0.0f,  0.0f),
+    glm::vec3(2.0f,  5.0f, -15.0f),
+    glm::vec3(-1.5f, -2.2f, -2.5f),
+    glm::vec3(-3.8f, -2.0f, -12.3f),
+    glm::vec3(2.4f, -0.4f, -3.5f),
+    glm::vec3(-1.7f,  3.0f, -7.5f),
+    glm::vec3(1.3f, -2.0f, -2.5f),
+    glm::vec3(1.5f,  2.0f, -2.5f),
+    glm::vec3(1.5f,  0.2f, -1.5f),
+    glm::vec3(-1.3f,  1.0f, -1.5f)
+    };
+
+    // load different position of each cube
+    for (unsigned int i = 0; i < 10; i++)
+    {
+        if (i == 0)
+        {
+            model10[i] = glm::translate(glm::mat4(1.0f), cubePositions[i]);
+        } 
+        else
+        {
+            model10[i] = glm::translate(model10[i], cubePositions[i]);
+        }
+        model10[i] = glm::scale(model10[i], glm::vec3(1.5, 1.5, 1.5));
+    }
+
+    glEnable(GL_DEPTH_TEST);
+
+
+    //---camera
+    //camera direction
+    glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+    glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget); //pointing in the reverse direction of what it is targeting
+
+    //right axis, x axis, cross product of up vector and camera direction (z)
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+
+    //up axis
+    glm::vec3 cameraUp = glm::normalize(glm::cross(cameraDirection,cameraRight));
+    //With the help of the cross product and a few tricks we were able to create all the vectors that form the view/camera space.
+
+    //look at
+    /*
+    if you define a coordinate space using 3 perpendicular (or non-linear) axes 
+    you can create a matrix with those 3 axes plus a translation vector 
+    and you can transform any vector to that coordinate space by multiplying it with this matrix. 
+    */
+    //a camera position, a target position, a vector that represents the up vector in world space 
+    glm::mat4 cameraView = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f),
+                                       glm::vec3(0.0f, 0.0f, 0.0f),
+                                       glm::vec3(0.0f, 1.0f, 0.0f));
+
+
     float b = 0.0;
     float increment = 0.05f;
-    float rotationDegree = 0.1;
+    float rotationDegree = 0.01;
+    const float radius = 10.0f;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         renderer.Clear();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         testClearColor.OnUpdate(0.0f);
         testClearColor.OnRender();
@@ -186,26 +277,21 @@ int main_rotatePic(void)
         testClearColor.OnImGuiRender();
         testClearColor.ImGuiTimesColor();
 
-        //trans = glm::scale(trans, glm::vec3(2, 2, 2)); // scale to 0.5 on each axis
+        float camX = sin(glfwGetTime()) * radius;
+        float camZ = cos(glfwGetTime()) * radius;
 
-        {
-            trans = glm::rotate(trans, glm::radians(rotationDegree), glm::vec3(0.0f, 0.0f, 1.0f)); //rotate around z axis
-            glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
-            glm::mat4 mvp = proj * view * model * trans;
-            //----bind buffer for every frame
-            //shader.SetUniform4f("u_Color", 0.2, 0.3f, 0.0f, 1.0f);
-            shader.SetUniform4f("u_Color", testClearColor.m_TimesColor[0], testClearColor.m_TimesColor[1], testClearColor.m_TimesColor[2], testClearColor.m_TimesColor[3]);
-            shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
-            renderer.Draw(VA, IB, shader);
-        }
 
+        for (unsigned int i = 0; i < 10; i++)
         {
-            trans2 = glm::rotate(trans2, glm::radians(-rotationDegree), glm::vec3(0.0f, 0.0f, 1.0f)); //rotate around z axis
-            glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
-            glm::mat4 mvp = proj * view * model * trans2;
-            //----bind buffer for every frame
-            //shader.SetUniform4f("u_Color", 0.2, 0.3f, b, 1.0f);
+            float angle = 20.0f * i;
+            model10[i] = glm::rotate(model10[i], rotationDegree, glm::vec3(1.0f, 0.3f, 0.5f));
+            glm::mat4 proj3 = glm::perspective(glm::radians(45.0f), 960.0f / 540.0f, 0.1f, 100.0f);
+            //glm::mat4 view3 = glm::translate(glm::mat4(1.0f), glm::vec3(0.50f, 0.0f, -3.0f));
+            glm::mat4 view3 = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+            glm::mat4 mvp = proj3 * view3 * model10[i];
             shader.SetUniformMat4f("u_ModelViewProjectionMatrix", mvp);
+
+            //renderer.DrawArray(VA, shader,36);
             renderer.Draw(VA, IB, shader);
         }
 

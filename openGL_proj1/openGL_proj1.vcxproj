@@ -159,6 +159,9 @@
     <ClCompile Include="src\4_ShaderInNewFile.cpp" />
     <ClCompile Include="src\5_Vertex Arrays.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\6_AbstractingIntoClasses.cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\7_CoordinateSystem.cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\8_Camera.cpp" />
+    <ClCompile Include="src\6_abstractingIntoClasses\9_CameraWalkAround.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\IndexBuffer .cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\Renderer.cpp" />
     <ClCompile Include="src\6_abstractingIntoClasses\Shader.cpp" />

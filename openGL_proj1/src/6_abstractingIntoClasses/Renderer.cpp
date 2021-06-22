@@ -29,3 +29,12 @@ void Renderer::Draw(const VertexArray& VA, const IndexBuffer& IB, const Shader& 
 
     GLCall(glDrawElements(GL_TRIANGLES, IB.GetCount(), GL_UNSIGNED_INT, 0));
 }
+
+void Renderer::DrawArray(const VertexArray& VA, const Shader& shader, const int count) const
+{
+    shader.Bind();
+    VA.Bind();
+
+    //GLCall(glDrawElements(GL_TRIANGLES, IB.GetCount(), GL_UNSIGNED_INT, 0));
+    GLCall(glDrawArrays(GL_TRIANGLES, 0, count));
+}

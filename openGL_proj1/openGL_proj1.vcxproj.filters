@@ -81,6 +81,15 @@
     <ClCompile Include="src\6_abstractingIntoClasses\tests\TestClearColor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\6_abstractingIntoClasses\7_CoordinateSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\6_abstractingIntoClasses\8_Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\6_abstractingIntoClasses\9_CameraWalkAround.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
